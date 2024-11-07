@@ -63,5 +63,4 @@ class Convert:
             except subprocess.CalledProcessError as e:
                 messagebox.showerror("Erro", f"Erro ao converter o PDF para PDF/A:\n{e}")
             finally:
-                if temp_pdf_path.endswith("_temp.pdf") and os.path.exists(temp_pdf_path):
-                    os.remove(temp_pdf_path)
+                os.remove(temp_pdf_path)
