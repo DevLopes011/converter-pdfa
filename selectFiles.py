@@ -4,7 +4,7 @@ from tkinter import messagebox
 
 class SelectFile:
     def __init__(self):
-        # Definir as variáveis de estado
+
         self.file_paths = []
 
     def select_files(self):
@@ -27,9 +27,11 @@ class SelectFile:
             )
             if self.file_paths:
                 messagebox.showinfo("Arquivos Selecionados", f"{len(self.file_paths)} arquivos selecionados com sucesso!")
+                root.quit()
             else:
                 messagebox.showwarning("Nenhum Arquivo", "Nenhum arquivo foi selecionado.")
-
+                root.quit()
+    
         convert_button = tk.Button(
             root, 
             text="Converter Imagem ou PDF para PDF/A", 
