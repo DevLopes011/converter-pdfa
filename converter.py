@@ -1,23 +1,13 @@
 import os
 import subprocess
-from tkinter import filedialog, messagebox
+from tkinter import messagebox
 from PIL import Image
-
 
 class Convert:
     def __init__(self):
         self.temp_pdf_paths = []
         self.pdf_output_path = None  
         self.file_paths = []  
-
-    def select_files(self):
-        """ Método separado para selecionar arquivos (imagens ou PDFs). """
-        self.file_paths = filedialog.askopenfilenames(
-            title="Selecione os arquivos", 
-            filetypes=[("Arquivos", "*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.pdf")]
-        )
-        print(self.file_paths)
-        return self.file_paths
 
     def convert_images_to_pdf(self, file_paths):
         """ Método que converte as imagens selecionadas para PDF. """
@@ -59,8 +49,9 @@ class Convert:
 
             try:
                 subprocess.run(command, check=True)
-                messagebox.showinfo("Sucesso", f"PDF convertido para PDF/A com sucesso!\n{self.pdf_output_path}")
             except subprocess.CalledProcessError as e:
                 messagebox.showerror("Erro", f"Erro ao converter o PDF para PDF/A:\n{e}")
             finally:
-                os.remove(temp_pdf_path)
+                if self.pdf_output_path:
+                    os.remove(temp_pdf_path)
+        messagebox.showinfo("Sucesso", f"PDF convertido para PDF/A com sucesso!\n{self.pdf_output_path}")
